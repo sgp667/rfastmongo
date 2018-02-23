@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sgp667/rfastmongo.svg?branch=master)](https://travis-ci.org/sgp667/rfastmongo)
+
 # rfastmongo
 
 This is a package that allows developer to write queries for MongoDB using R functions instead of properly formated character strings.
