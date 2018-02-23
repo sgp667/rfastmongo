@@ -7,5 +7,6 @@ Depends: R (>= 3.4.0)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat
+Suggests: testthat, mongolite
 RoxygenNote: 6.0.1
+Imports: jsonlite, purrr
