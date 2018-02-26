@@ -2,20 +2,23 @@ context("Parsting of query operators")
 library(jsonlite)
 
 test_that("Queries can be parsed into JSON",{
-  parser_output <- build_query(list(a = 1))
-  expected_json <- toJSON(list(a = 1),auto_unbox = TRUE)
-
-  expect_is(parser_output,"json")
-  expect_equal(parser_output,expected_json,
-               info = paste0("Output: ",parser_output,"\n","Expected: ",expected_json))
-
+  expect_json(build_query(list(a = 1)),as_JSON('{"a":1}'))
 })
 
-test_that("Empty queries are parsed as curly brackets", {
-  parser_output <- build_query(list())
-  expected_json <- toJSON(NULL,auto_unbox = TRUE)
+test_that("Empty lists are parsed as curly brackets", {
+  expect_json(build_query(list()),as_JSON("{}"))
+})
 
-  expect_is(parser_output,"json")
-  expect_equal(parser_output,expected_json,
-               info = paste0("Output: ",parser_output,"\n","Expected: ",expected_json))
+test_that("Lists nested in vector are parsed as arrays of objects", {
+  expect_json(
+    build_query(list(list("a" = 1),list("b" = 2))),
+    as_JSON('[{"a":1},{"b":2}]')
+  )
+})
+
+test_that("Query operator functions can be parsed into JSON",{
+  expect_json(
+    build_query(find_query( field = gt(1))),
+    as_JSON('{"field":{"$gt":1}}')
+  )
 })

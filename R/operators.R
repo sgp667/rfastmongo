@@ -1,24 +1,290 @@
+#'  Mongo Query Operators
+#'
+#' @return a list that can be parsed into a part of/whole MongoDB query
+#' @details Some query operators already have meaning in R language such as: in
+#' for you to get around this you can refer to is as `in`(in surrounded by backtick) or inside
+#' @rdname operators
 
 
-#' gt
-#'
-#' @param x value that your field will be compared to
-#'
-#' @return greater than mongo operator
-#' @export
-gt <- function(x) {
-  list(`$gt` = x)
+# Top Level Query functions ----
+
+find_query <- function(...) {
+  operators <- list(...)
+
+  lapply(operators,function(x){
+    attr(x,"context") <- "find"
+    x
+  })
 }
 
 
+# Query generalized operators ----
 
+general_operator <- function(name, x, allowed_context) {
+  operator <- list()
+  attr(operator,"allowed_context") <- allowed_context
 
-#' eq
-#'
-#' @param x value that your field will be compared to
-#'
-#' @return equals than mongo operator
+  attr(x,"context") <- name
+
+  operator[[paste0("$",name)]] <- x
+  operator
+}
+
+find_operator <- function(name, x) {
+  general_operator(name, x, "find")
+}
+
+project_operator <- function(name, x) {
+  general_operator(name, x, "project")
+}
+
+update_operator <- function(name, x) {
+  general_operator(name, x, "update")
+}
+
+# Query Selectors  : Comparison -----
+
 #' @export
+#' @rdname operators
+gt <- function(x) {
+  find_operator("gt",x)
+}
+
+#' @export
+#' @rdname operators
+gte <- function(x) {
+  find_operator("gte",x)
+}
+
+#' @export
+#' @rdname operators
 eq <- function(x) {
-  list(`$eq` = x)
+  find_operator("eq",x)
+}
+
+#' @export
+#' @rdname operators
+ne <- function(x) {
+  find_operator("ne",x)
+}
+
+
+#' @export
+#' @rdname operators
+lt <- function(x) {
+  find_operator("lt",x)
+}
+
+#' @export
+#' @rdname operators
+lte <- function(x) {
+  find_operator("lte",x)
+}
+
+#' @export
+#' @rdname operators
+
+`in` <- function(x) {
+  find_operator("in",x)
+}
+
+#' @export
+#' @rdname operators
+
+inside <- function(x) {
+  `in`(x)
+}
+
+#' @export
+#' @rdname operators
+nin <- function(x) {
+  find_operator("nin",x)
+}
+
+
+# Query Selectors  : Logical -----
+
+#' @export
+#' @rdname operators
+and <- function(x) {
+  find_operator("and",x)
+}
+
+#' @export
+#' @rdname operators
+not <- function(x) {
+  find_operator("not",x)
+}
+
+
+#' @export
+#' @rdname operators
+nor <- function(x) {
+  find_operator("nor",x)
+}
+
+
+#' @export
+#' @rdname operators
+or <- function(x) {
+  find_operator("or",x)
+}
+
+
+# Query Selectors  : Element -----
+
+#' @export
+#' @rdname operators
+exists <- function(x) {
+  find_operator("exists",x)
+}
+
+#' @export
+#' @rdname operators
+type <- function(x) {
+  find_operator("type",x)
+}
+
+# Query Selectors  : Evaluation -----
+
+#' @export
+#' @rdname operators
+expr <- function(x) {
+  find_operator("expr",x)
+}
+
+#' @export
+#' @rdname operators
+jsonSchema <- function(x) {
+  find_operator("jsonSchema",x)
+}
+
+#' @export
+#' @rdname operators
+mod <- function(x) {
+  find_operator("mod",x)
+}
+
+#' @export
+#' @rdname operators
+regex <- function(x) {
+  find_operator("regex",x)
+}
+
+#' @export
+#' @rdname operators
+type <- function(x) {
+  find_operator("type",x)
+}
+
+#' @export
+#' @rdname operators
+text <- function(x) {
+  find_operator("text",x)
+}
+
+#' @export
+#' @rdname operators
+where <- function(x) {
+  find_operator("where",x)
+}
+
+# Query Selectors  : Geospatial -----
+
+#' @export
+#' @rdname operators
+geoIntersects <- function(x) {
+  find_operator("geoIntersects",x)
+}
+
+#' @export
+#' @rdname operators
+geoWithin <- function(x) {
+  find_operator("geoWithin",x)
+}
+
+#' @export
+#' @rdname operators
+near <- function(x) {
+  find_operator("near",x)
+}
+
+#' @export
+#' @rdname operators
+nearSphere <- function(x) {
+  find_operator("nearSphere",x)
+}
+# Query Selectors  : Array -----
+
+#' @export
+#' @rdname operators
+all <- function(x) {
+  find_operator("all",x)
+}
+
+#' @export
+#' @rdname operators
+size <- function(x) {
+  find_operator("size",x)
+}
+# Query Selectors  : Bitwise -----
+
+#' @export
+#' @rdname operators
+bitsAllClear <- function(x) {
+  find_operator("bitsAllClear",x)
+}
+
+#' @export
+#' @rdname operators
+bitsAllSet <- function(x) {
+  find_operator("bitsAllSet",x)
+}
+
+#' @export
+#' @rdname operators
+bitsAnyClear <- function(x) {
+  find_operator("bitsAnyClear",x)
+}
+
+#' @export
+#' @rdname operators
+bitsAnySet <- function(x) {
+  find_operator("bitsAnySet",x)
+}
+# Query Selectors : Comment -----
+
+#' @export
+#' @rdname operators
+comment <- function(x) {
+  find_operator("comment",x)
+}
+
+# Query Selectors & Projectors : elemMatch -----
+
+#' @export
+#' @rdname operators
+elemMatch <- function(x) {
+  general_operator("elemMatch",x,c("find","project"))
+}
+# Query Projectors -----
+
+#' @export
+#' @rdname operators
+meta <- function(x) {
+  project_operator("meta",x)
+}
+
+#' @export
+#' @rdname operators
+slice <- function(x) {
+  project_operator("slice",x)
+}
+
+#' @export
+#' @rdname operators
+`$` <- function(x) {
+  # TODO add validation step which makes sure that x array is in find query
+  # TODO building name of this operator required putting $ sign at the end and field name in the front as of now this will fail
+  find_operator("",x)
 }
