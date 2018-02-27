@@ -11,4 +11,4 @@ LazyData: true
 Suggests: testthat, mongolite,
     covr
 RoxygenNote: 6.0.1
-Imports: jsonlite, purrr, margittr
+Imports: jsonlite, purrr, magrittr

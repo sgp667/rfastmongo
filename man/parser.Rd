@@ -5,7 +5,7 @@
 \alias{is_empty_query}
 \title{Query Parsing Functions}
 \usage{
-parse_query(x, prettify = FALSE)
+parse_query(x, prettify = FALSE, drop_nulls = TRUE)
 
 is_empty_query(x)
 }
