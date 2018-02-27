@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/sgp667/rfastmongo.svg?branch=master)](https://travis-ci.org/sgp667/rfastmongo)
+[![codecov](https://codecov.io/gh/sgp667/rfastmongo/branch/master/graph/badge.svg)](https://codecov.io/gh/sgp667/rfastmongo)
 
 # rfastmongo
 
