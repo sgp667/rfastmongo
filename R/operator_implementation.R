@@ -14,31 +14,6 @@ find_query <- function(...) {
   })
 }
 
-
-# Query generalized operators ----
-
-general_operator <- function(name, x, allowed_context) {
-  operator <- list()
-  attr(operator,"allowed_context") <- allowed_context
-
-  attr(x,"context") <- name
-
-  operator[[paste0("$",name)]] <- x
-  operator
-}
-
-find_operator <- function(name, x) {
-  general_operator(name, x, "find")
-}
-
-project_operator <- function(name, x) {
-  general_operator(name, x, "project")
-}
-
-update_operator <- function(name, x) {
-  general_operator(name, x, "update")
-}
-
 #' Operators that can be used inside a MongoDB Query available as r function
 #' @title Query Operators
 #' @param x to be compared in operator
@@ -70,6 +45,7 @@ eq <- function(x) {
 #' @export
 #' @rdname operators
 ne <- function(x) {
+  expect_number("ne",x)
   find_operator("ne",x)
 }
 
@@ -77,6 +53,7 @@ ne <- function(x) {
 #' @export
 #' @rdname operators
 lt <- function(x) {
+  expect_single_argument("lt",x)
   find_operator("lt",x)
 }
 

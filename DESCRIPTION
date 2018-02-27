@@ -4,10 +4,10 @@ Version: 0.0.0.9000
 Authors@R: person("Tomasz", "Cholewik", email = "tomasz.cholewik@gmail.com", role = c("aut", "cre"))
 Description: Allows building queries for MongoDB queries using R functions rather than 
     expect developer to write query as a properly formated string.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.2.0)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat, covr
+Suggests: devtools, testthat, covr
 RoxygenNote: 6.0.1
 Imports: jsonlite, purrr, magrittr
