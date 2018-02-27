@@ -6,13 +6,25 @@
 #' @return character string that is a properly formated json ready for querying the database
 #' @export
 #' @rdname parser
-build_query <- function(x, prettify = FALSE) {
-  query <- list(x,NULL)[[1 + is_empty_query(x)]]
-  jsonlite::toJSON(query,pretty = prettify,auto_unbox = TRUE,Date = "ISO8601",POSIXt = "mongo")
+parse_query <- function(x, prettify = FALSE, drop_nulls = TRUE) {
+  x %>%
+    prune_query() %>%
+    if_empty_query_null()%>%
+    jsonlite::toJSON(pretty = prettify,auto_unbox = TRUE,Date = "ISO8601",POSIXt = "mongo")
 }
 
 #' @export
 #' @rdname parser
 is_empty_query <- function(x) {
   is.list(x) & length(x) == 0
+}
+
+if_empty_query_null <- function(x){
+  list(x,NULL)[[1 + is_empty_query(x)]]
+}
+prune_query <- function(x) {
+  prune_nested_list <- function(x) {
+    purrr::map_if(x,is.list,prune_nested_list) %>% purrr::compact()
+  }
+  prune_nested_list(x)
 }
