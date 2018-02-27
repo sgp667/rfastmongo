@@ -22,12 +22,15 @@ update_operator <- function(name, x) {
   general_operator(name, x, "update")
 }
 
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
 expect_number <- function(operator_name,x) {
   assertthat::assert_that(
     assertthat::is.number(x),
     msg = paste(operator_name, "expects a numeric value, received:",x))
 }
 
+#' @importFrom assertthat assert_that
 expect_single_argument <- function(operator_name,x) {
   assertthat::assert_that(
     length(x) == 1,
