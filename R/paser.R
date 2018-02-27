@@ -2,6 +2,7 @@
 #'
 #' @param x R object(list or vector) that can be parsed into ason
 #' @param prettify flag for jsonlite::toJSON adds line breaks in output
+#' @param drop_nulls check if each opearator has values and remove it if it is empty
 #'
 #' @return character string that is a properly formated json ready for querying the database
 #' @export

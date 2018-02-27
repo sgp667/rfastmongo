@@ -13,6 +13,8 @@ is_empty_query(x)
 \item{x}{R object(list or vector) that can be parsed into ason}
 
 \item{prettify}{flag for jsonlite::toJSON adds line breaks in output}
+
+\item{drop_nulls}{check if each opearator has values and remove it if it is empty}
 }
 \value{
 character string that is a properly formated json ready for querying the database
