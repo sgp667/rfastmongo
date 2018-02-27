@@ -16,4 +16,4 @@ r_binary_packages:
 after_success:
   - Rscript -e 'devtools::install()'
   - Rscript -e 'devtools::test()'
-  - Rscript -e 'covr::report()'
+  - Rscript -e 'covr::package_coverage(type = "all",combine_types = FALSE)'
