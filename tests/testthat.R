@@ -1,4 +1,4 @@
 library(testthat)
-library(rfastmongo)
+library(rfastmongo,warn.conflicts = FALSE)
 
-test_check("rfastmongo",reporter = CheckReporter)
+test_check("rfastmongo",reporter = ListReporter)
