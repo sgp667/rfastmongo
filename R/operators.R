@@ -1,13 +1,10 @@
-#'  Mongo Query Operators
-#'
-#' @return a list that can be parsed into a part of/whole MongoDB query
-#' @details Some query operators already have meaning in R language such as: in
-#' for you to get around this you can refer to is as `in`(in surrounded by backtick) or inside
-#' @rdname operators
-
 
 # Top Level Query functions ----
 
+#' Top level object that stores all of operators that make up a query
+#' @param ... find operators
+#' @return nested lists that can be parsed into a MongoDB query, or JSON string
+#' @rdname queries
 find_query <- function(...) {
   operators <- list(...)
 
@@ -41,6 +38,14 @@ project_operator <- function(name, x) {
 update_operator <- function(name, x) {
   general_operator(name, x, "update")
 }
+
+#' Operators that can be used inside a MongoDB Query available as r function
+#' @title Query Operators
+#' @param x to be compared in operator
+#' @return a list that can be parsed into a part of/whole MongoDB query
+#' @name  operators
+#' @details Some query operators already have meaning in R language such as: in
+#' for you to get around this you can refer to is as `in`(in surrounded by backtick) or inside
 
 # Query Selectors  : Comparison -----
 
