@@ -5,6 +5,7 @@
 #'
 #' @return character string that is a properly formated json ready for querying the database
 #' @export
+#' @importFrom magrittr %>%
 #' @rdname parser
 parse_query <- function(x, prettify = FALSE, drop_nulls = TRUE) {
   x %>%

@@ -9,4 +9,6 @@ r_binary_packages:
   - roxygen2
 
 after_success:
-  - Rscript -e 'devtools::install();devtools::test()'
+  - Rscript -e 'devtools::install()'
+  - Rscript -e 'devtools::test()'
+  - Rscript -e 'covr::report()'
