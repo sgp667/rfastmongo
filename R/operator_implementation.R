@@ -262,11 +262,3 @@ meta <- function(x) {
 slice <- function(x) {
   project_operator("slice",x)
 }
-
-#' @export
-#' @rdname operators
-`$` <- function(x) {
-  # TODO add validation step which makes sure that x array is in find query
-  # TODO building name of this operator required putting $ sign at the end and field name in the front as of now this will fail
-  find_operator("",x)
-}

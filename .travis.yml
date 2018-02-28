@@ -2,16 +2,27 @@
 
 sudo: false
 cache: packages
+
+os:
+  - linux
+  - osx
+
 language: r
 r:
   - oldrel
   - release
   - devel
 
+matrix:
+  fast_finish: true
+  allow_failures:
+  - r: oldrel
+
 r_binary_packages:
   - devtools
   - roxygen2
   - covr
+  - purrr
 
 after_success:
   - Rscript -e 'devtools::install()'
