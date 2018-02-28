@@ -6,7 +6,6 @@
 #'
 #' @return character string that is a properly formated json ready for querying the database
 #' @export
-#' @importFrom magrittr %>%
 #' @rdname parser
 parse_query <- function(x, prettify = FALSE, drop_nulls = TRUE) {
   x %>%
@@ -25,7 +24,7 @@ if_empty_query_null <- function(x){
   list(x,NULL)[[1 + is_empty_query(x)]]
 }
 
-#' @importFrom magrittr %>%
+
 prune_query <- function(x) {
   prune_nested_list <- function(x) {
     purrr::map_if(x,is.list,prune_nested_list) %>% purrr::compact()
