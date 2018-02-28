@@ -38,7 +38,6 @@
 \alias{elemMatch}
 \alias{meta}
 \alias{slice}
-\alias{$}
 \title{Query Operators}
 \usage{
 gt(x)
@@ -112,8 +111,6 @@ elemMatch(x)
 meta(x)
 
 slice(x)
-
-"$"(x)
 }
 \arguments{
 \item{x}{to be compared in operator}
