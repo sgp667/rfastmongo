@@ -1,3 +1,16 @@
+
+#' Query
+#' This function is a wrapper used to make it possible to build queries using magrittr pipes
+#' @param x an unfinished mongo query object
+#' @param ... additional operators to be included
+#'
+#' @return monogo query object with additional operators included
+#' @export
+query <- function(x,...) {
+   new_operators <- list(...)
+   c(x,unlist(new_operators))
+}
+
 # Query generalized operators ----
 
 general_operator <- function(name, x, allowed_context) {
