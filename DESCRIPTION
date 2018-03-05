@@ -1,6 +1,6 @@
 Package: rfastmongo
 Title: Provides utilities for building mongo query using R code
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person("Tomasz", "Cholewik", email = "tomasz.cholewik@gmail.com", role = c("aut", "cre"))
 Description: Allows building queries for MongoDB queries using R functions rather than 
     expect developer to write query as a properly formated string.

@@ -1,19 +1,3 @@
-
-# Top Level Query functions ----
-
-#' Top level object that stores all of operators that make up a query
-#' @param ... find operators
-#' @return nested lists that can be parsed into a MongoDB query, or JSON string
-#' @rdname queries
-find_query <- function(...) {
-  operators <- list(...)
-
-  lapply(operators,function(x){
-    attr(x,"context") <- "find"
-    x
-  })
-}
-
 #' Operators that can be used inside a MongoDB Query available as r function
 #' @title Query Operators
 #' @param x to be compared in operator
@@ -22,7 +6,7 @@ find_query <- function(...) {
 #' @details Some query operators already have meaning in R language such as: in
 #' for you to get around this you can refer to is as `in`(in surrounded by backtick) or inside
 
-# Query Selectors  : Comparison -----
+# Selectors : Comparison -----
 
 #' @export
 #' @rdname operators
@@ -84,7 +68,7 @@ nin <- function(x) {
 }
 
 
-# Query Selectors  : Logical -----
+# Selectors : Logical -----
 
 #' @export
 #' @rdname operators
@@ -113,7 +97,7 @@ or <- function(x) {
 }
 
 
-# Query Selectors  : Element -----
+# Selectors : Element -----
 
 #' @export
 #' @rdname operators
@@ -127,7 +111,7 @@ type <- function(x) {
   find_operator("type",x)
 }
 
-# Query Selectors  : Evaluation -----
+# Selectors : Evaluation -----
 
 #' @export
 #' @rdname operators
@@ -171,7 +155,7 @@ where <- function(x) {
   find_operator("where",x)
 }
 
-# Query Selectors  : Geospatial -----
+# Selectors : Geospatial -----
 
 #' @export
 #' @rdname operators
@@ -196,7 +180,7 @@ near <- function(x) {
 nearSphere <- function(x) {
   find_operator("nearSphere",x)
 }
-# Query Selectors  : Array -----
+# Selectors : Array -----
 
 #' @export
 #' @rdname operators
@@ -209,7 +193,7 @@ all <- function(x) {
 size <- function(x) {
   find_operator("size",x)
 }
-# Query Selectors  : Bitwise -----
+# Selectors : Bitwise -----
 
 #' @export
 #' @rdname operators
@@ -234,7 +218,7 @@ bitsAnyClear <- function(x) {
 bitsAnySet <- function(x) {
   find_operator("bitsAnySet",x)
 }
-# Query Selectors : Comment -----
+# Selectors : Comment -----
 
 #' @export
 #' @rdname operators
@@ -242,14 +226,14 @@ comment <- function(x) {
   find_operator("comment",x)
 }
 
-# Query Selectors & Projectors : elemMatch -----
+# Selectors & Projectors : elemMatch -----
 
 #' @export
 #' @rdname operators
 elemMatch <- function(x) {
   general_operator("elemMatch",x,c("find","project"))
 }
-# Query Projectors -----
+# Projectors -----
 
 #' @export
 #' @rdname operators
@@ -261,4 +245,120 @@ meta <- function(x) {
 #' @rdname operators
 slice <- function(x) {
   project_operator("slice",x)
+}
+
+# Update Operators : Fields -----
+
+#' @export
+#' @rdname operators
+currentDate <- function(x) {
+  update_operator("currentDate",x)
+}
+
+#' @export
+#' @rdname operators
+inc <- function(x) {
+  update_operator("inc",x)
+}
+
+#' @export
+#' @rdname operators
+min <- function(x) {
+  update_operator("min",x)
+}
+
+#' @export
+#' @rdname operators
+max <- function(x) {
+  update_operator("max",x)
+}
+
+#' @export
+#' @rdname operators
+mul <- function(x) {
+  update_operator("mul",x)
+}
+
+#' @export
+#' @rdname operators
+rename <- function(x) {
+  update_operator("rename",x)
+}
+
+#' @export
+#' @rdname operators
+set <- function(x) {
+  update_operator("set",x)
+}
+
+#' @export
+#' @rdname operators
+unset <- function(x) {
+  update_operator("unset",x)
+}
+
+# Update Operators : Array -----
+
+#' @export
+#' @rdname operators
+addToSet <- function(x) {
+  update_operator("addToSet",x)
+}
+
+#' @export
+#' @rdname operators
+pop <- function(x) {
+  update_operator("pop",x)
+}
+
+
+#' @export
+#' @rdname operators
+pull <- function(x) {
+  update_operator("pull",x)
+}
+
+#' @export
+#' @rdname operators
+push <- function(x) {
+  update_operator("push",x)
+}
+
+#' @export
+#' @rdname operators
+pullAll <- function(x) {
+  update_operator("pullAll",x)
+}
+# Update Operators : Modifiers -----
+
+#' @export
+#' @rdname operators
+each <- function(x) {
+  update_operator("each",x)
+}
+
+#' @export
+#' @rdname operators
+position <- function(x) {
+  update_operator("position",x)
+}
+
+#' @export
+#' @rdname operators
+slice <- function(x) {
+  update_operator("slice",x)
+}
+
+#' @export
+#' @rdname operators
+sort <- function(x) {
+  update_operator("sort",x)
+}
+
+# Update Operators : Bitwise -----
+
+#' @export
+#' @rdname operators
+bit <- function(x) {
+  update_operator("bit",x)
 }

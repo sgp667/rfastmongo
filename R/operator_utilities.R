@@ -1,10 +1,41 @@
+# Top Level Query functions ----
 
+#' Top level functions that store all of operators that make up a query
+#' @param ... query operators
+#' @return nested lists that can be parsed into a MongoDB query, or JSON string
+#' @rdname queries
+find_query <- function(...) {
+  operators <- list(...)
+
+  lapply(operators,function(x){
+    attr(x,"context") <- "find"
+    x
+  })
+}
+
+#' @rdname queries
+project_query <- function(...) {
+  operators <- list(...)
+
+  lapply(operators,function(x){
+    attr(x,"context") <- "project"
+    x
+  })
+}
+
+#' @rdname queries
+update_query <- function(...) {
+  operators <- list(...)
+
+  lapply(operators,function(x){
+    attr(x,"context") <- "update"
+    x
+  })
+}
 #' Query
 #' This function is a wrapper used to make it possible to build queries using magrittr pipes
 #' @param x an unfinished mongo query object
-#' @param ... additional operators to be included
-#'
-#' @return monogo query object with additional operators included
+#' @rdname queries
 #' @export
 query <- function(x,...) {
    new_operators <- list(...)
