@@ -293,6 +293,12 @@ set <- function(x) {
 
 #' @export
 #' @rdname operators
+setOnInsert <- function(x) {
+  update_operator("setOnInsert",x)
+}
+
+#' @export
+#' @rdname operators
 unset <- function(x) {
   update_operator("unset",x)
 }
