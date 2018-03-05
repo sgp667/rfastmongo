@@ -45,6 +45,7 @@
 \alias{mul}
 \alias{rename}
 \alias{set}
+\alias{setOnInsert}
 \alias{unset}
 \alias{addToSet}
 \alias{pop}
@@ -143,6 +144,8 @@ mul(x)
 rename(x)
 
 set(x)
+
+setOnInsert(x)
 
 unset(x)
 
