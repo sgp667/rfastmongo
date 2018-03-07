@@ -1,5 +1,6 @@
-context("Parsting of query operators")
 
+
+context("Parsting of query operators")
 
 test_that("Queries can be parsed into JSON",{
   expect_json(parse_query(list(a = 1)),as_JSON('{"a":1}'))
@@ -40,3 +41,28 @@ test_that("Empty lists are parsed as curly brackets", {
   expect_json(parse_query(list()),as_JSON("{}"))
 })
 
+context("Github Issues Unsorted")
+
+test_that('Issue #1: ield names within some operators are parsed as "$operator.fieldname"',{
+  query <- query(
+    list(),
+    set(list(a = 1))
+    )
+
+  expect_json(
+    parse_query(query),
+    as_JSON('{"$set":{"a":1}} ')
+  )
+})
+
+test_that("Issue #2: query function adds number to operator names",{
+  query <- query(
+    list(),
+    addToSet(list(a = 1:3))
+    )
+
+  expect_json(
+    parse_query(query),
+    as_JSON('{"$addToSet":{"a":[1,2,3]}}')
+  )
+})
